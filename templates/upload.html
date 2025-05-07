@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block title %}DeepFake AI Detection - Upload Media{% endblock %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h2>Upload Media for Deepfake Detection</h2>
+        <p>Upload an image or video file to analyze for potential deepfake manipulation.</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Media Upload</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="upload-area" id="upload-area">
+                        <i class="fas fa-cloud-upload-alt fa-3x text-info mb-3"></i>
+                        <h5>Drag & Drop your file here</h5>
+                        <p>or click to browse files</p>
+                        <p class="small text-muted">Supported formats: JPG, JPEG, PNG, MP4, AVI, MOV</p>
+                        {{ form.media(class="d-none", id="media") }}
+                    </div>
+                    
+                    {% if form.media.errors %}
+                    <div class="alert alert-danger">
+                        {% for error in form.media.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    <div id="preview-container" class="text-center mb-3">
+                        <!-- Preview will be shown here -->
+                    </div>
+                    
+                    <p id="preview-text" class="small text-center mb-3">
+                        No file selected
+                    </p>
+                    
+                    <div class="d-grid gap-2">
+                        {{ form.submit(class="btn btn-info") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Guidelines</h5>
+            </div>
+            <div class="card-body">
+                <h6><i class="fas fa-info-circle text-info"></i> Supported File Types:</h6>
+                <ul>
+                    <li>Images: JPG, JPEG, PNG</li>
+                    <li>Videos: MP4, AVI, MOV</li>
+                </ul>
+                
+                <h6><i class="fas fa-file-upload text-info"></i> File Size Limits:</h6>
+                <p>Maximum file size: 16MB</p>
+                
+                <h6><i class="fas fa-lock text-info"></i> Privacy:</h6>
+                <p>Your uploaded files are securely processed and automatically deleted after analysis.</p>
+                
+                <h6><i class="fas fa-exclamation-triangle text-warning"></i> Important Note:</h6>
+                <p>For best results, upload clear images or videos with visible faces. Low quality or heavily compressed media may reduce detection accuracy.</p>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">About the Detection</h5>
+            </div>
+            <div class="card-body">
+                <p>Our system uses advanced AI models to detect potential deepfake manipulations in images and videos.</p>
+                <p>The detection process includes:</p>
+                <ul>
+                    <li>Face detection and extraction</li>
+                    <li>Deep learning analysis for manipulation artifacts</li>
+                    <li>Confidence score calculation</li>
+                    <li>Visual explanation of the detected areas</li>
+                </ul>
+                <p>After processing, you'll receive a detailed report with the detection results and visual explanations.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="alert alert-info">
+            <h5><i class="fas fa-lightbulb"></i> Detection Tips</h5>
+            <p>To improve detection accuracy:</p>
+            <ul>
+                <li>Upload high-resolution images or videos when possible</li>
+                <li>For videos, ensure they have a reasonable frame rate and duration</li>
+                <li>Images with clear facial features tend to yield more accurate results</li>
+                <li>Avoid heavily filtered or edited content that may interfere with detection</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
