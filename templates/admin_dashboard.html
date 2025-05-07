@@ -1,0 +1,281 @@
+{% extends "layout.html" %}
+
+{% block title %}DeepFake AI Detection - Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h2>Admin Dashboard</h2>
+        <p>System management and monitoring tools for administrators.</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card admin-section">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">System Overview</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total Users
+                        <span class="badge bg-info rounded-pill">{{ users|length }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Admin Users
+                        <span class="badge bg-info rounded-pill">{{ users|selectattr('is_admin', 'equalto', true)|list|length }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total Detections
+                        <span class="badge bg-info rounded-pill">0</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Recent Logs
+                        <span class="badge bg-info rounded-pill">{{ logs|length }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card admin-section">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">User Management</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Joined</th>
+                                <th>Detections</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    {% if user.is_admin %}
+                                    <span class="badge bg-info">Admin</span>
+                                    {% else %}
+                                    <span class="badge bg-secondary">User</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ user.created_at.strftime('%Y-%m-%d') }}</td>
+                                <td>0</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="{{ url_for('edit_user', user_id=user.id) }}" class="btn btn-sm btn-info">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal{{ user.id }}">
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Delete User Modal -->
+                                    <div class="modal fade" id="deleteUserModal{{ user.id }}" tabindex="-1" aria-labelledby="deleteUserModalLabel{{ user.id }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteUserModalLabel{{ user.id }}">Confirm Delete</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to delete user <strong>{{ user.username }}</strong>? This action cannot be undone.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <a href="{{ url_for('delete_user', user_id=user.id) }}" class="btn btn-danger">Delete User</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card admin-section">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Security Logs</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Event Type</th>
+                                <th>User</th>
+                                <th>IP Address</th>
+                                <th>Event Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for log in logs %}
+                            <tr>
+                                <td>{{ log.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                <td>
+                                    {% if log.event_type == 'LOGIN' %}
+                                    <span class="badge bg-success">{{ log.event_type }}</span>
+                                    {% elif log.event_type == 'LOGOUT' %}
+                                    <span class="badge bg-secondary">{{ log.event_type }}</span>
+                                    {% elif log.event_type == 'REGISTRATION' %}
+                                    <span class="badge bg-info">{{ log.event_type }}</span>
+                                    {% elif log.event_type == 'DETECTION' %}
+                                    <span class="badge bg-primary">{{ log.event_type }}</span>
+                                    {% elif log.event_type == 'REPORT' %}
+                                    <span class="badge bg-warning">{{ log.event_type }}</span>
+                                    {% else %}
+                                    <span class="badge bg-dark">{{ log.event_type }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if log.user_id %}
+                                    {% set log_user = users|selectattr('id', 'equalto', log.user_id)|first %}
+                                    {% if log_user %}
+                                    {{ log_user.username }}
+                                    {% else %}
+                                    Unknown
+                                    {% endif %}
+                                    {% else %}
+                                    N/A
+                                    {% endif %}
+                                </td>
+                                <td>{{ log.ip_address }}</td>
+                                <td>{{ log.event_info }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card admin-section">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Detection Statistics</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="detectionStatsChart" width="400" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card admin-section">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">System Information</h5>
+            </div>
+            <div class="card-body">
+                <h6 class="mb-3">AI Model Information:</h6>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Model Type
+                        <span>CNN/Transformer Hybrid</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Base Architecture
+                        <span>MobileNetV2</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Visualization Method
+                        <span>Grad-CAM/LIME</span>
+                    </li>
+                </ul>
+                
+                <h6 class="mb-3">System Configuration:</h6>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Backend Framework
+                        <span>Flask</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Database
+                        <span>SQLAlchemy</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Media Processing
+                        <span>OpenCV/TensorFlow</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Max Upload Size
+                        <span>16MB</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize admin dashboard charts
+        const ctx = document.getElementById('detectionStatsChart').getContext('2d');
+        
+        // Sample data for demonstration
+        // In a real implementation, this would be populated from the backend
+        const detectionChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Today', 'Yesterday', '2 Days Ago', '3 Days Ago', '4 Days Ago', '5 Days Ago', '6 Days Ago'],
+                datasets: [
+                    {
+                        label: 'Deepfakes Detected',
+                        data: [4, 2, 5, 3, 7, 6, 2],
+                        backgroundColor: 'rgba(220, 53, 69, 0.7)',
+                        borderColor: 'rgba(220, 53, 69, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Authentic Media',
+                        data: [8, 5, 3, 6, 9, 4, 7],
+                        backgroundColor: 'rgba(40, 167, 69, 0.7)',
+                        borderColor: 'rgba(40, 167, 69, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Detection Results Over Time'
+                    }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

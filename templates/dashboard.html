@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+
+{% block title %}DeepFake AI Detection - Dashboard{% endblock %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h2>Welcome, {{ current_user.username }}!</h2>
+        <p>This is your deepfake detection dashboard where you can manage your detection activities.</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <h5 class="card-title">Upload Media</h5>
+                <p class="card-text">Upload an image or video for deepfake detection analysis.</p>
+                <a href="{{ url_for('upload') }}" class="btn btn-info">Upload Now</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <h5 class="card-title">Detection History</h5>
+                <p class="card-text">View your previous detection results and reports.</p>
+                <a href="{{ url_for('history') }}" class="btn btn-info">View History</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <h5 class="card-title">About Deepfakes</h5>
+                <p class="card-text">Learn more about deepfake technology and detection methods.</p>
+                <a href="{{ url_for('about') }}" class="btn btn-info">Learn More</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Recent Detection Results</h5>
+            </div>
+            <div class="card-body">
+                {% if recent_results %}
+                <div class="list-group">
+                    {% for result in recent_results %}
+                    <a href="{{ url_for('results', result_id=result.id) }}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">{{ result.media.original_filename }}</h6>
+                            <small>{{ result.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+                        </div>
+                        <p class="mb-1">
+                            {% if result.is_deepfake %}
+                            <span class="badge bg-danger">Deepfake</span>
+                            {% else %}
+                            <span class="badge bg-success">Authentic</span>
+                            {% endif %}
+                            <span class="ms-2">Confidence: {{ (result.confidence_score * 100)|round(2) }}%</span>
+                        </p>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-center">No detection results yet. <a href="{{ url_for('upload') }}">Upload media</a> to get started.</p>
+                {% endif %}
+            </div>
+            <div class="card-footer text-center">
+                <a href="{{ url_for('history') }}" class="btn btn-sm btn-outline-info">View All Results</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Detection Statistics</h5>
+            </div>
+            <div class="card-body">
+                <div class="text-center">
+                    <canvas id="historyChart" width="400" height="300"
+                        data-real="{{ recent_results|selectattr('is_deepfake', 'equalto', false)|list|length }}"
+                        data-fake="{{ recent_results|selectattr('is_deepfake', 'equalto', true)|list|length }}">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card bg-dark text-white">
+            <div class="card-body">
+                <h5 class="card-title">Latest Deepfake Technology Updates</h5>
+                <p>Stay informed about the latest developments in deepfake technology and detection methods.</p>
+                
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <div class="card bg-dark border-info">
+                            <div class="card-body">
+                                <h6 class="card-title">Visual Explanation Technology</h6>
+                                <p class="card-text small">Our system now provides visual explanations using LIME and Grad-CAM technologies to highlight manipulated areas in images.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-dark border-info">
+                            <div class="card-body">
+                                <h6 class="card-title">Video Frame Analysis</h6>
+                                <p class="card-text small">Enhanced video detection capabilities that analyze frame-by-frame inconsistencies for more accurate detection.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-dark border-info">
+                            <div class="card-body">
+                                <h6 class="card-title">Transformer-based Models</h6>
+                                <p class="card-text small">Implementing state-of-the-art transformer-based models for improved detection accuracy and lower false positives.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // This script initializes the dashboard chart
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeCharts();
+    });
+</script>
+{% endblock %}
