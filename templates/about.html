@@ -1,0 +1,210 @@
+{% extends "layout.html" %}
+
+{% block title %}DeepFake AI Detection - About{% endblock %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h2>About the DeepFake AI Detection System</h2>
+        <p>Our AI-based deepfake detection system provides advanced capabilities for identifying manipulated images and videos.</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8">
+        <div class="card about-section">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">System Overview</h5>
+            </div>
+            <div class="card-body">
+                <h6 class="mb-3">What is the DeepFake AI Detection System?</h6>
+                <p>Our system is designed to detect deepfake media by using advanced deep learning models to identify visual inconsistencies and manipulation artifacts that are typically invisible to the human eye. The system processes uploaded images or videos, analyzes them for signs of manipulation, and provides a detailed report with visual explanations.</p>
+                
+                <h6 class="mb-3 mt-4">Key Features:</h6>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul>
+                            <li>User-friendly web interface for media upload</li>
+                            <li>Advanced AI models for deepfake detection</li>
+                            <li>Visual explanation of detected manipulations</li>
+                            <li>Confidence score assessment</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            <li>Comprehensive detection reports</li>
+                            <li>Support for both images and videos</li>
+                            <li>Secure media processing with encryption</li>
+                            <li>Historical tracking of detection results</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card about-section mt-4">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Deepfake Technology & Detection</h5>
+            </div>
+            <div class="card-body">
+                <h6 class="mb-3">What are Deepfakes?</h6>
+                <p>Deepfakes are synthetic media where a person's likeness is replaced with someone else's using artificial intelligence, specifically deep learning techniques. The term "deepfake" comes from the deep learning technology used to create these convincing fake videos or images.</p>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <img src="https://images.unsplash.com/photo-1598556146869-aeb261893c35" alt="AI facial analysis" class="img-fluid rounded mb-3">
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Common Deepfake Applications:</h6>
+                        <ul>
+                            <li>Face swapping in videos</li>
+                            <li>Facial expression manipulation</li>
+                            <li>Voice synthesis and impersonation</li>
+                            <li>Full body manipulation</li>
+                            <li>Creation of non-existent people</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h6 class="mb-3 mt-4">How Deepfake Detection Works:</h6>
+                <p>Our detection system employs multiple techniques to identify deepfakes:</p>
+                <ol>
+                    <li><strong>Visual Artifact Detection:</strong> Identifying inconsistencies in lighting, shadows, and reflections.</li>
+                    <li><strong>Facial Analysis:</strong> Detecting unnatural facial movements, blinking patterns, and expressions.</li>
+                    <li><strong>Boundary Detection:</strong> Finding inconsistent boundaries where manipulated content meets original content.</li>
+                    <li><strong>Texture Analysis:</strong> Identifying unnatural skin textures or patterns created by AI generation.</li>
+                    <li><strong>Metadata Analysis:</strong> Examining image or video metadata for signs of manipulation.</li>
+                </ol>
+                
+                <h6 class="mb-3 mt-4">Explainable AI Techniques:</h6>
+                <p>We use advanced visualization techniques to explain detection results:</p>
+                <ul>
+                    <li><strong>LIME (Local Interpretable Model-agnostic Explanations):</strong> Highlights regions that influenced the detection decision.</li>
+                    <li><strong>Grad-CAM (Gradient-weighted Class Activation Mapping):</strong> Visualizes the regions the AI focused on when making its decision.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card about-section">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Why Deepfake Detection Matters</h5>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b" alt="Cybersecurity concept" class="img-fluid rounded">
+                </div>
+                
+                <h6>Potential Risks of Deepfakes:</h6>
+                <ul>
+                    <li>Misinformation and fake news</li>
+                    <li>Identity theft and fraud</li>
+                    <li>Reputation damage</li>
+                    <li>Political manipulation</li>
+                    <li>Privacy violations</li>
+                </ul>
+                
+                <p class="mt-3">As deepfake technology becomes more sophisticated and accessible, the ability to detect manipulated media becomes increasingly important for maintaining information integrity and trust in digital content.</p>
+            </div>
+        </div>
+        
+        <div class="card about-section mt-4">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Our Technology</h5>
+            </div>
+            <div class="card-body">
+                <h6>AI Models Used:</h6>
+                <ul>
+                    <li>Convolutional Neural Networks (CNN)</li>
+                    <li>Recurrent Neural Networks (RNN)</li>
+                    <li>Transformer-based models</li>
+                    <li>Hybrid detection systems</li>
+                </ul>
+                
+                <h6 class="mt-3">Development Approach:</h6>
+                <p>Our system is continuously trained on the latest deepfake examples to stay ahead of evolving manipulation techniques. We employ a multi-modal approach that analyzes various aspects of media to provide comprehensive detection results.</p>
+                
+                <div class="text-center mt-3">
+                    <img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4" alt="Data analysis" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+        
+        <div class="card about-section mt-4">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Privacy & Security</h5>
+            </div>
+            <div class="card-body">
+                <p>We prioritize the security and privacy of your data:</p>
+                <ul>
+                    <li>All uploaded media is encrypted during processing</li>
+                    <li>Original files are automatically deleted after analysis</li>
+                    <li>Detection results are stored securely</li>
+                    <li>No data is shared with third parties</li>
+                </ul>
+                
+                <div class="text-center mt-3">
+                    <img src="https://images.unsplash.com/photo-1595450547833-95af46d7c43a" alt="Cybersecurity" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Research Team</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2 team-member">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Team member" class="img-fluid rounded-circle">
+                        <h6>Md Rasel Bhuyan</h6>
+                        <p class="small">Lead AI Researcher</p>
+                    </div>
+                    <div class="col-md-2 team-member">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Team member" class="img-fluid rounded-circle">
+                        <h6>Marjana Khanam</h6>
+                        <p class="small">Computer Vision Expert</p>
+                    </div>
+                    <div class="col-md-2 team-member">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80" alt="Team member" class="img-fluid rounded-circle">
+                        <h6>Mahmuda Akter Moni</h6>
+                        <p class="small">Deep Learning Specialist</p>
+                    </div>
+                    <div class="col-md-2 team-member">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e" alt="Team member" class="img-fluid rounded-circle">
+                        <h6>Md.Zahid-Ur-Rashid</h6>
+                        <p class="small">System Architect</p>
+                    </div>
+                    <div class="col-md-2 team-member">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="Team member" class="img-fluid rounded-circle">
+                        <h6>Sk MD Khairul Bosor Ribon</h6>
+                        <p class="small">Security Researcher</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card bg-dark text-white">
+            <div class="card-body text-center">
+                <h4>Ready to try our deepfake detection system?</h4>
+                <p>Upload your media now and get instant results with detailed visual explanations.</p>
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('upload') }}" class="btn btn-info btn-lg mt-2">Upload Media</a>
+                {% else %}
+                <a href="{{ url_for('register') }}" class="btn btn-info btn-lg mt-2">Get Started</a>
+                <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg mt-2 ms-2">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

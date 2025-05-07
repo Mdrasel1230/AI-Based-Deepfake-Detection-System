@@ -1,0 +1,146 @@
+/* Custom styles for DeepFake AI Detection app */
+
+/* Main content area with padding for fixed nav */
+.main-content {
+    padding-top: 70px;
+    padding-bottom: 30px;
+    min-height: calc(100vh - 200px);
+}
+
+/* Hero section on homepage */
+.hero {
+    background: linear-gradient(rgba(33, 37, 41, 0.8), rgba(33, 37, 41, 0.9)), url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    margin-top: -1rem;
+    text-align: center;
+    border-radius: 0.3rem;
+}
+
+/* Feature icons */
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--bs-info);
+}
+
+/* Footer styling */
+footer {
+    padding: 40px 0;
+    margin-top: 2rem;
+}
+
+/* Card hover effects */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Team member styling */
+.team-member {
+    text-align: center;
+    padding: 15px;
+}
+
+.team-member img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* Admin section styling */
+.admin-section .card-header {
+    font-weight: 500;
+}
+
+/* About section styling */
+.about-section img {
+    max-height: 200px;
+    object-fit: cover;
+}
+
+/* Result visualization styling */
+.visualization-container {
+    margin: 30px 0;
+}
+
+.heatmap-toggle {
+    margin: 20px 0;
+}
+
+/* Upload form styling */
+.upload-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.upload-preview {
+    max-width: 100%;
+    max-height: 300px;
+    margin: 20px auto;
+    display: block;
+    border-radius: 5px;
+}
+
+.upload-area {
+    border: 2px dashed var(--bs-info);
+    border-radius: 10px;
+    padding: 50px 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover, .upload-area-active {
+    background-color: rgba(13, 202, 240, 0.05);
+    border-color: rgba(13, 202, 240, 0.8);
+}
+
+/* History table styling */
+.history-table img {
+    max-width: 80px;
+    max-height: 60px;
+    object-fit: cover;
+}
+
+/* Loading spinner */
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+/* Detection result badges */
+.badge-real, .badge-fake {
+    font-size: 1rem;
+    padding: 10px 20px;
+}
+
+/* Confidence meter */
+.confidence-meter {
+    height: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+/* Dashboard card customization */
+.dashboard-card {
+    height: 100%;
+}
+
+.dashboard-card .card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-card .card-footer {
+    margin-top: auto;
+}
