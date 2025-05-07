@@ -1,0 +1,190 @@
+{% extends "layout.html" %}
+
+{% block title %}DeepFake AI Detection - Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero mt-4">
+    <div class="container">
+        <h1 class="text-light">AI-Based Deepfake Detection System</h1>
+        <p class="text-light">Detect manipulated images and videos with advanced AI technology</p>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('upload') }}" class="btn btn-info btn-lg">Upload Media</a>
+        {% else %}
+        <a href="{{ url_for('register') }}" class="btn btn-info btn-lg">Get Started</a>
+        <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg ms-2">Login</a>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Sample Images -->
+<section class="container mt-5">
+    <h2 class="text-center mb-4">Deepfake Detection Examples</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="https://images.unsplash.com/photo-1648195699350-fa0ed4a263e7" class="card-img-top" alt="Deepfake detection example">
+                <div class="card-body">
+                    <h5 class="card-title">Face Manipulation</h5>
+                    <p class="card-text">Our system can identify facial manipulations in images with high accuracy.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="https://images.unsplash.com/photo-1590488395599-1299b500d29b" class="card-img-top" alt="Deepfake detection example">
+                <div class="card-body">
+                    <h5 class="card-title">Video Analysis</h5>
+                    <p class="card-text">Detect frame-by-frame inconsistencies in manipulated videos.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="https://images.unsplash.com/photo-1606206522398-de3bd05b1615" class="card-img-top" alt="Deepfake detection example">
+                <div class="card-body">
+                    <h5 class="card-title">Visual Explanation</h5>
+                    <p class="card-text">Get detailed visual explanations of why content was flagged as deepfake.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="container mt-5">
+    <h2 class="text-center mb-4">Key Features</h2>
+    <div class="row">
+        <div class="col-md-4 text-center mb-4">
+            <div class="feature-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <h3>AI-Powered Detection</h3>
+            <p>Using advanced deep learning models to detect manipulated media with high accuracy.</p>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Confidence Score</h3>
+            <p>Get detailed confidence scores and understand the certainty of detection results.</p>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="feature-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <h3>Detailed Reports</h3>
+            <p>Generate comprehensive reports with visual explanations for detected manipulations.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 text-center mb-4">
+            <div class="feature-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h3>Secure Processing</h3>
+            <p>Your uploaded media is securely processed and automatically deleted after analysis.</p>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="feature-icon">
+                <i class="fas fa-history"></i>
+            </div>
+            <h3>Detection History</h3>
+            <p>Keep track of your detection results and access them at any time.</p>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="feature-icon">
+                <i class="fas fa-stream"></i>
+            </div>
+            <h3>Real-time Processing</h3>
+            <p>Fast and efficient analysis of images and videos with quick turnaround time.</p>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="container mt-5">
+    <h2 class="text-center mb-4">How It Works</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card bg-dark">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <div class="rounded-circle bg-info p-3 mb-3 mx-auto" style="width: 60px; height: 60px;">
+                                <i class="fas fa-upload text-white fs-4"></i>
+                            </div>
+                            <h5>Upload</h5>
+                            <p class="small">Upload your image or video</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="rounded-circle bg-info p-3 mb-3 mx-auto" style="width: 60px; height: 60px;">
+                                <i class="fas fa-cog text-white fs-4"></i>
+                            </div>
+                            <h5>Process</h5>
+                            <p class="small">AI analyzes the content</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="rounded-circle bg-info p-3 mb-3 mx-auto" style="width: 60px; height: 60px;">
+                                <i class="fas fa-search text-white fs-4"></i>
+                            </div>
+                            <h5>Detect</h5>
+                            <p class="small">System identifies manipulations</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="rounded-circle bg-info p-3 mb-3 mx-auto" style="width: 60px; height: 60px;">
+                                <i class="fas fa-file-alt text-white fs-4"></i>
+                            </div>
+                            <h5>Report</h5>
+                            <p class="small">Get detailed results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="container mt-5 text-center">
+    <div class="card bg-dark p-5">
+        <h2 class="text-light">Ready to Detect Deepfakes?</h2>
+        <p class="text-light mb-4">Join our platform to access advanced deepfake detection technology</p>
+        {% if current_user.is_authenticated %}
+        <div>
+            <a href="{{ url_for('upload') }}" class="btn btn-info btn-lg">Upload Media Now</a>
+        </div>
+        {% else %}
+        <div>
+            <a href="{{ url_for('register') }}" class="btn btn-info btn-lg">Create Account</a>
+            <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg ms-2">Login</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Additional Resources -->
+<section class="container mt-5">
+    <h2 class="text-center mb-4">Learn More About Deepfakes</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">What are Deepfakes?</h5>
+                    <p class="card-text">Deepfakes are synthetic media where a person's likeness is replaced with someone else's using artificial intelligence. Learn about the technology behind deepfakes and their potential implications.</p>
+                    <a href="{{ url_for('about') }}" class="btn btn-outline-info">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Protecting Against Misinformation</h5>
+                    <p class="card-text">Deepfakes can be used to spread misinformation. Our technology helps identify manipulated content to prevent the spread of fake information and maintain media integrity.</p>
+                    <a href="{{ url_for('about') }}" class="btn btn-outline-info">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
