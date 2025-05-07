@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block title %}DeepFake AI Detection - Login{% endblock %}
+
+{% block content %}
+<div class="row mt-5 justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h4 class="mb-0">Login to Your Account</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('login') }}">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-3">
+                        {{ form.email.label(class="form-label") }}
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.password.label(class="form-label") }}
+                        {% if form.password.errors %}
+                            {{ form.password(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        {{ form.remember(class="form-check-input") }}
+                        {{ form.remember.label(class="form-check-label") }}
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        {{ form.submit(class="btn btn-info") }}
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <small>Don't have an account? <a href="{{ url_for('register') }}">Register</a></small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <div class="card bg-dark text-white">
+            <div class="card-body text-center">
+                <h4>AI-Based Deepfake Detection</h4>
+                <p>Our system uses advanced AI models to detect manipulated images and videos with high accuracy.</p>
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <img src="https://images.unsplash.com/photo-1707236585854-f776e6e3c108" alt="Deepfake detection" class="img-fluid rounded mb-3" style="max-height: 200px; width: auto;">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74" alt="AI facial analysis" class="img-fluid rounded mb-3" style="max-height: 200px; width: auto;">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="https://images.unsplash.com/photo-1595450547833-95af46d7c43a" alt="Cybersecurity concept" class="img-fluid rounded mb-3" style="max-height: 200px; width: auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
